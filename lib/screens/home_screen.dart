@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:yoga_project/Providers/data_provider.dart';
 import 'package:yoga_project/widgets/fsr_chart.dart';
 import 'package:yoga_project/widgets/multiple_skeletons.dart';
@@ -17,10 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<DataProvider>(
-      context,
-      listen: false,
-    ).connectWebsocket();
   }
 
   String? selectedItem = "FSR";
@@ -42,7 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: CustomScrollView(
         slivers: [
-          const MultipleSkeletons(),
+          const MultipleSkeletons(
+          ),
           SliverToBoxAdapter(
             child: Container(
               margin: const EdgeInsets.all(16),
