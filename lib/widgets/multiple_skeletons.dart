@@ -26,28 +26,37 @@ class _MultipleSkeletonsState extends State<MultipleSkeletons> {
 
   @override
   Widget build(BuildContext context) {
+    // final height = MediaQuery.of(context).size.height;
+    // final width = MediaQuery.of(context).size.width;
     return SliverToBoxAdapter(
       child: Container(
-        margin: const EdgeInsets.all(16),
-        padding: const EdgeInsets.all(16),
-        height: MediaQuery.of(context).size.height * 0.50,
+        margin: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
+        height: MediaQuery.of(context).size.width * 1.2,
+        width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
         ),
         child: LayoutBuilder(builder: (context, constraints) {
           return GridView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 2,
+            itemCount: 20,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 8,
               crossAxisSpacing: 8,
-              childAspectRatio: constraints.minHeight / constraints.minWidth,
+              childAspectRatio:
+                  (constraints.minHeight - 16) / (constraints.minWidth - 16),
             ),
             itemBuilder: (ctx, index) {
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 1,
+                    style: BorderStyle.solid,
+                  ),
+                  // color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: StreamBuilder(
@@ -64,26 +73,33 @@ class _MultipleSkeletonsState extends State<MultipleSkeletons> {
                       );
                     }
                     if (snapshot.hasData) {
+                      
                       return StreamBuilder<List<Landmark>>(
                           stream: Provider.of<DataProvider>(
                             context,
                             listen: false,
                           ).getLandmarks(
-                            snapshot,
+                            snapshot.data,
                             index,
                           ),
                           builder: (context, snapshot_0) {
-                            if (!snapshot_0.hasData) {
+                            if (snapshot_0.connectionState ==
+                                ConnectionState.waiting) {
                               return const Center(
-                                child: Text("Participant not available"),
+                                child: Text(
+                                  "Wait a moment",
+                                ),
                               );
                             }
-                            return CustomPaint(
-                              painter: PaintStickMan(
-                                landmarks: snapshot_0.data ?? [],
-                              ),
-                              child: Container(),
-                            );
+                            if (snapshot_0.hasData) {
+                              return CustomPaint(
+                                painter: PaintStickMan(
+                                  landmarks: snapshot_0.data!,
+                                ),
+                                child: Container(),
+                              );
+                            }
+                            return Text("Nope");
                           });
                     }
                     return const Center(

@@ -54,12 +54,14 @@ class _PulseGsrChartState extends State<PulseGsrChart> {
             zoomPanBehavior: _zoomPanBehavior,
             series: <ChartSeries<GsrPulse, String>>[
               FastLineSeries(
+                animationDuration: 0,
                 dataSource: dataList,
                 xValueMapper: (GsrPulse data, _) => data.time.toString(),
                 yValueMapper: (GsrPulse data, _) => data.gsr,
                 yAxisName: "GSR",
               ),
               FastLineSeries(
+                animationDuration: 0,
                 dataSource: dataList,
                 xValueMapper: (GsrPulse data, _) => data.time.toString(),
                 yValueMapper: (GsrPulse data, _) => data.pulse,

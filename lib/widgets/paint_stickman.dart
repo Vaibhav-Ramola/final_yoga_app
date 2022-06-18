@@ -104,7 +104,7 @@ class PaintStickMan extends CustomPainter {
     canvas.drawLine(hipPoint, leftHipPoint, paint);
     canvas.drawLine(leftHipPoint, leftKneePoint, paint);
     canvas.drawLine(leftKneePoint, leftFootPoint, paint);
-    canvas.drawLine(hipPoint, rightKneePoint, paint);
+    canvas.drawLine(rightHipPoint, rightKneePoint, paint);
     canvas.drawLine(rightKneePoint, rightFootPoint, paint);
   }
 

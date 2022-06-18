@@ -37,14 +37,19 @@ class _FSRChartState extends State<FSRChart> {
               // alignment: Alignment.center,
               text: "FSR Chart",
             ),
-            primaryXAxis: CategoryAxis(),
+            primaryYAxis: CategoryAxis(
+              isVisible: false,
+            ),
+            axes: [NumericAxis(isVisible: true, name: "fsr")],
             tooltipBehavior: _tooltipBehavior,
             zoomPanBehavior: _zoomPanBehavior,
             series: <ChartSeries<Fsr, String>>[
               FastLineSeries(
+                animationDuration: 0,
                 dataSource: dataList,
                 xValueMapper: (Fsr data, _) => data.time.toString(),
                 yValueMapper: (Fsr data, _) => data.fsr,
+                yAxisName: "fsr",
               ),
             ],
           ),

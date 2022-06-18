@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:yoga_project/Providers/data_provider.dart';
 import 'package:yoga_project/widgets/fsr_chart.dart';
 import 'package:yoga_project/widgets/multiple_skeletons.dart';
 import 'package:yoga_project/widgets/pulse_gsr_chart.dart';

@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:yoga_project/models/landmark.dart';
 import 'dart:convert';
 
@@ -19,27 +18,32 @@ class DataProvider with ChangeNotifier {
     // var data_0 = json.encode("");
     Map<String, dynamic>? data = json.decode(response) as Map<String, dynamic>;
     data = data["5"]["data"]["$index"];
+    // print("Data at $index = $data");
     if (data == null) {
       return null;
     }
     List<dynamic> X = data["X"];
     List<dynamic> Y = data["Y"];
+    // print(X);
     return Stream.periodic(
-      const Duration(milliseconds: 30),
+      const Duration(microseconds: 1),
       ((computationCount) {
         for (final pair in IterableZip([X, Y])) {
           List<Landmark> landmarks = [];
-          List<double> x = pair[0];
-          List<double> y = pair[1];
+          List<dynamic> x = pair[0];
+          List<dynamic> y = pair[1];
+          // print(x.length);
+          // print(y.length);
           for (final lm in IterableZip([x, y])) {
             landmarks.add(
               Landmark(
-                x: lm[0],
-                y: lm[1],
+                x: double.parse(lm[0].toString()),
+                y: double.parse(lm[1].toString()),
                 time: null,
               ),
             );
           }
+          // print(landmarks);
           return landmarks;
         }
         return [];
