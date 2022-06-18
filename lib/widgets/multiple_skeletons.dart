@@ -1,9 +1,11 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:yoga_project/Providers/data_provider.dart';
 import 'package:yoga_project/models/landmark.dart';
 import 'package:yoga_project/widgets/paint_stickman.dart';
+import 'dart:convert';
 
 class MultipleSkeletons extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
@@ -62,48 +64,37 @@ class _MultipleSkeletonsState extends State<MultipleSkeletons> {
                 child: StreamBuilder(
                   stream: stream,
                   builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
+                    if (!snapshot.hasData) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
-                    if (snapshot.connectionState == ConnectionState.done) {
+                    List<Landmark> landmarks = [];
+                    Map<String, dynamic>? data =
+                        json.decode(snapshot.data.toString())
+                            as Map<String, dynamic>;
+                    data = data["5"]["data"]["$index"];
+                    if (data == null) {
                       return const Center(
-                        child: Text("Connection cancelled"),
+                        child: Text("Participant not available,"),
                       );
                     }
-                    if (snapshot.hasData) {
-                      
-                      return StreamBuilder<List<Landmark>>(
-                          stream: Provider.of<DataProvider>(
-                            context,
-                            listen: false,
-                          ).getLandmarks(
-                            snapshot.data,
-                            index,
-                          ),
-                          builder: (context, snapshot_0) {
-                            if (snapshot_0.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: Text(
-                                  "Wait a moment",
-                                ),
-                              );
-                            }
-                            if (snapshot_0.hasData) {
-                              return CustomPaint(
-                                painter: PaintStickMan(
-                                  landmarks: snapshot_0.data!,
-                                ),
-                                child: Container(),
-                              );
-                            }
-                            return Text("Nope");
-                          });
+                    List<dynamic> x = data["X"][0];
+                    List<dynamic> y = data["Y"][0];
+                    for (final pair in IterableZip([x, y])) {
+                      landmarks.add(
+                        Landmark(
+                          x: double.parse(pair[0].toString()),
+                          y: double.parse(pair[1].toString()),
+                          time: null,
+                        ),
+                      );
                     }
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return CustomPaint(
+                      painter: PaintStickMan(
+                        landmarks: landmarks,
+                      ),
+                      child: Container(),
                     );
                   },
                 ),

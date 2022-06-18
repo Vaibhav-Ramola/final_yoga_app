@@ -72,11 +72,11 @@ class PaintStickMan extends CustomPainter {
       landmarks[15].x * size.width,
       landmarks[15].y * size.height,
     );
-    final radius = sqrt((landmarks[4].x - landmarks[0].x) *
-                (landmarks[4].x - landmarks[0].x) +
-            (landmarks[4].y - landmarks[0].y) *
-                (landmarks[4].y - landmarks[0].y)) *
-        size.shortestSide;
+    // final radius = sqrt((landmarks[4].x - landmarks[0].x) *
+    //             (landmarks[4].x - landmarks[0].x) +
+    //         (landmarks[4].y - landmarks[0].y) *
+    //             (landmarks[4].y - landmarks[0].y)) *
+    //     size.shortestSide;
     // defining the paint
     final headPaint = Paint()
       ..color = Colors.black
@@ -85,11 +85,11 @@ class PaintStickMan extends CustomPainter {
     final paint = Paint()
       ..color = Colors.black
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = radius / 2;
+      ..strokeWidth = 10;
     // drawing the canvas
     canvas.drawCircle(
       headPoint,
-      radius,
+      20,
       headPaint,
     );
     canvas.drawLine(headPoint, chestPoint, paint);
