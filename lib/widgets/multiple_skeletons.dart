@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:yoga_project/Providers/data_provider.dart';
 import 'package:yoga_project/models/landmark.dart';
+import 'package:yoga_project/websocket_factory/websocket_client_factory.dart';
 import 'package:yoga_project/widgets/paint_stickman.dart';
 import 'dart:convert';
 
@@ -22,7 +23,7 @@ class _MultipleSkeletonsState extends State<MultipleSkeletons> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    channel = WebSocketChannel.connect(Uri.parse("ws://192.168.0.116:7892/"));
+    channel = makeWsClient("ws://192.168.0.116:7892/");
     stream = channel.stream.asBroadcastStream();
   }
 
