@@ -1,15 +1,19 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:yoga_project/models/landmark.dart';
 import 'dart:convert';
 
 class DataProvider with ChangeNotifier {
   // late Map<String, dynamic> incommingData;
-  // late WebSocketChannel channel;
-  // void connectWebsocket() {
-  //   channel = WebSocketChannel.connect(Uri.parse("ws://192.162.0.237:7891/"));
-  // }
+  late WebSocketChannel channel;
+  dynamic _stream;
+  void connectWebsocket() {
+    channel = WebSocketChannel.connect(Uri.parse("ws://192.168.0.116:7892/"));
+    _stream = channel.stream.asBroadcastStream();
+  }
 
+  Stream<dynamic> get stream => _stream;
   // dynamic get stream {
   //   return channel.stream.asBroadcastStream();
   // }

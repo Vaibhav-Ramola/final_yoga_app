@@ -1,10 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:yoga_project/Providers/data_provider.dart';
 import 'package:yoga_project/models/landmark.dart';
-import 'package:yoga_project/websocket_factory/websocket_client_factory.dart';
 import 'package:yoga_project/widgets/paint_stickman.dart';
 import 'dart:convert';
 
@@ -17,15 +15,14 @@ class MultipleSkeletons extends StatefulWidget {
 }
 
 class _MultipleSkeletonsState extends State<MultipleSkeletons> {
-  late WebSocketChannel channel;
-  late Stream<dynamic> stream;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    channel = makeWsClient("ws://192.168.0.116:7892/");
-    stream = channel.stream.asBroadcastStream();
-  }
+  // late WebSocketChannel channel;
+  // late Stream<dynamic> stream;
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   // channel = makeWsClient("ws://192.168.0.116:7892/");
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +32,7 @@ class _MultipleSkeletonsState extends State<MultipleSkeletons> {
       child: Container(
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(8),
-        height: MediaQuery.of(context).size.width * 1.2,
+        height: MediaQuery.of(context).size.width * 1.33,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
@@ -63,7 +60,10 @@ class _MultipleSkeletonsState extends State<MultipleSkeletons> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: StreamBuilder(
-                  stream: stream,
+                  stream: Provider.of<DataProvider>(
+                    context,
+                    listen: false,
+                  ).stream,
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(

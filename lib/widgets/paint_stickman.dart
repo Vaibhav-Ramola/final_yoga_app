@@ -44,10 +44,10 @@ class PaintStickMan extends CustomPainter {
       landmarks[9].x * size.width,
       landmarks[9].y * size.height,
     );
-    final hipPoint = Offset(
-      (landmarks[12].x + landmarks[11].x) / 2 * size.width,
-      (landmarks[12].y + landmarks[11].y) / 2 * size.height,
-    );
+    // final hipPoint = Offset(
+    //   (landmarks[12].x + landmarks[11].x) / 2 * size.width,
+    //   (landmarks[12].y + landmarks[11].y) / 2 * size.height,
+    // );
     final leftHipPoint = Offset(
       landmarks[12].x * size.width,
       landmarks[12].y * size.height,
@@ -85,11 +85,11 @@ class PaintStickMan extends CustomPainter {
     final paint = Paint()
       ..color = Colors.black
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 10;
+      ..strokeWidth = 5;
     // drawing the canvas
     canvas.drawCircle(
       headPoint,
-      20,
+      12,
       headPaint,
     );
     canvas.drawLine(headPoint, chestPoint, paint);
@@ -99,9 +99,9 @@ class PaintStickMan extends CustomPainter {
     canvas.drawLine(leftElboPoint, leftHandPoint, paint);
     canvas.drawLine(rightShoulderPoint, rightElboPoint, paint);
     canvas.drawLine(rightElboPoint, rightHandPoint, paint);
-    canvas.drawLine(chestPoint, hipPoint, paint);
-    canvas.drawLine(hipPoint, rightHipPoint, paint);
-    canvas.drawLine(hipPoint, leftHipPoint, paint);
+    canvas.drawLine(leftShoulderPoint, leftHipPoint, paint);
+    canvas.drawLine(rightShoulderPoint, rightHipPoint, paint);
+    canvas.drawLine(rightHipPoint, leftHipPoint, paint);
     canvas.drawLine(leftHipPoint, leftKneePoint, paint);
     canvas.drawLine(leftKneePoint, leftFootPoint, paint);
     canvas.drawLine(rightHipPoint, rightKneePoint, paint);
