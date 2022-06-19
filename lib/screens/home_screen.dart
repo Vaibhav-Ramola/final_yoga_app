@@ -17,7 +17,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<DataProvider>(context, listen: false).connectWebsocket();
+    Provider.of<DataProvider>(
+      context,
+      listen: false,
+    ).connectWebsocket();
   }
 
   String? selectedItem = "FSR";
