@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:yoga_project/Providers/data_provider.dart';
@@ -20,7 +19,6 @@ class _EMGChartState extends State<EMGChart> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -29,7 +27,6 @@ class _EMGChartState extends State<EMGChart> {
     return SliverToBoxAdapter(
       child: Container(
         padding: const EdgeInsets.all(16),
-        // width: MediaQuery.of(context).size.height * 0.5,
         height: MediaQuery.of(context).size.height * 0.5,
         child: LayoutBuilder(builder: (context, constraints) {
           return GridView.builder(

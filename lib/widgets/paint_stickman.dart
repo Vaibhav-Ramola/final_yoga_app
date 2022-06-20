@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-
 import '../models/landmark.dart';
 
 class PaintStickMan extends CustomPainter {
@@ -11,15 +8,12 @@ class PaintStickMan extends CustomPainter {
   });
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
+    
     final headPoint = Offset(
       landmarks[0].x * size.width,
       landmarks[0].y * size.height,
     );
-    // final chestPoint = Offset(
-    //   (landmarks[6].x + landmarks[5].x) / 2 * size.width,
-    //   (landmarks[6].y + landmarks[5].y) / 2 * size.height,
-    // );
+    
     final leftShoulderPoint = Offset(
       landmarks[6].x * size.width,
       landmarks[6].y * size.height,
@@ -44,10 +38,7 @@ class PaintStickMan extends CustomPainter {
       landmarks[9].x * size.width,
       landmarks[9].y * size.height,
     );
-    // final hipPoint = Offset(
-    //   (landmarks[12].x + landmarks[11].x) / 2 * size.width,
-    //   (landmarks[12].y + landmarks[11].y) / 2 * size.height,
-    // );
+   
     final leftHipPoint = Offset(
       landmarks[12].x * size.width,
       landmarks[12].y * size.height,
@@ -72,12 +63,7 @@ class PaintStickMan extends CustomPainter {
       landmarks[15].x * size.width,
       landmarks[15].y * size.height,
     );
-    // final radius = sqrt((landmarks[4].x - landmarks[0].x) *
-    //             (landmarks[4].x - landmarks[0].x) +
-    //         (landmarks[4].y - landmarks[0].y) *
-    //             (landmarks[4].y - landmarks[0].y)) *
-    //     size.shortestSide;
-    // defining the paint
+    
     final headPaint = Paint()
       ..color = Colors.black
       ..strokeCap = StrokeCap.round
@@ -86,7 +72,7 @@ class PaintStickMan extends CustomPainter {
       ..color = Colors.black
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 4;
-    // drawing the canvas
+
     canvas.drawCircle(
       headPoint,
       8,
@@ -110,7 +96,7 @@ class PaintStickMan extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
+    
     return true;
   }
 }

@@ -15,14 +15,7 @@ class MultipleSkeletons extends StatefulWidget {
 }
 
 class _MultipleSkeletonsState extends State<MultipleSkeletons> {
-  // late WebSocketChannel channel;
-  // late Stream<dynamic> stream;
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   // channel = makeWsClient("ws://192.168.0.116:7892/");
-  // }
+
 
   @override
   Widget build(BuildContext context) {

@@ -19,7 +19,6 @@ class _FSRChartState extends State<FSRChart> {
   late TooltipBehavior _tooltipBehavior;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _zoomPanBehavior = ZoomPanBehavior(
       enablePanning: true,
