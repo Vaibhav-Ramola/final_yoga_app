@@ -41,6 +41,7 @@ dependencies:
   intl: ^0.17.0
   web_socket_channel: ^2.2.0
   collection: ^1.16.0
+  visibility_aware_state: ^1.0.3
 
 dev_dependencies:
   flutter_test:

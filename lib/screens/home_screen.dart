@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yoga_project/Providers/data_provider.dart';
+import 'package:yoga_project/widgets/analyze_widget.dart';
 import 'package:yoga_project/widgets/emg_chart.dart';
 import 'package:yoga_project/widgets/fsr_chart.dart';
 import 'package:yoga_project/widgets/multiple_skeletons.dart';
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ).connectWebsocket();
   }
 
+  final _scrollController = ScrollController();
   String? selectedItem = "FSR";
   List<String> sensorList = [
     "FSR",
@@ -41,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Yoga demo app"),
       ),
       body: CustomScrollView(
+        controller: _scrollController,
         slivers: [
           const MultipleSkeletons(),
           SliverToBoxAdapter(
@@ -65,42 +68,101 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SliverToBoxAdapter(
             child: Container(
-              margin: const EdgeInsets.all(8),
-              alignment: Alignment.centerRight,
-              width: double.infinity,
-              child: OutlinedButton(
-                child: const Text("Show chart"),
-                onPressed: () {
-                  if (selectedItem == "FSR") {
-                    setState(() {
-                      _showFSR = true;
-                      _showEMG = false;
-                      _showGSR = false;
-                    });
-                  }
-                  if (selectedItem == "Pulse-GSR") {
-                    setState(() {
-                      _showFSR = false;
-                      _showEMG = false;
-                      _showGSR = true;
-                    });
-                  }
-                  if (selectedItem == "EMG") {
-                    setState(() {
-                      _showFSR = false;
-                      _showEMG = true;
-                      _showGSR = false;
-                    });
-                  }
-                },
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      if (selectedItem == "FSR") {
+                        setState(() {
+                          _showFSR = true;
+                          _showEMG = false;
+                          _showGSR = false;
+                        });
+                      }
+                      if (selectedItem == "Pulse-GSR") {
+                        setState(() {
+                          _showFSR = false;
+                          _showEMG = false;
+                          _showGSR = true;
+                        });
+                      }
+                      if (selectedItem == "EMG") {
+                        setState(() {
+                          _showFSR = false;
+                          _showEMG = true;
+                          _showGSR = false;
+                        });
+                      }
+                      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                        scrollToEnd();
+                      });
+                    },
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all(
+                        const BorderSide(
+                          color: Colors.blue,
+                          width: 1,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      "Show Chart",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      setState(() {
+                        Provider.of<DataProvider>(context, listen: false)
+                            .toggleAnalyzer();
+                      });
+                      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                        scrollToEnd();
+                      });
+                    },
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all(
+                        const BorderSide(
+                          color: Colors.blue,
+                          width: 1,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      "Analyze",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
+          if (Provider.of<DataProvider>(context).analyzer)
+            const AnalyzeWidget(),
           if (_showFSR) const FSRChart(),
           if (_showGSR) const PulseGsrChart(),
           if (_showEMG) const EMGChart(),
         ],
       ),
+    );
+  }
+
+  void scrollToEnd() {
+    final end = _scrollController.position.maxScrollExtent;
+    _scrollController.animateTo(
+      end,
+      duration: const Duration(
+        milliseconds: 500,
+      ),
+      curve: Curves.easeIn,
     );
   }
 }
