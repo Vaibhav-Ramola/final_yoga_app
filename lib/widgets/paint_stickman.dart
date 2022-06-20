@@ -14,15 +14,15 @@ class PaintStickMan extends CustomPainter {
     // TODO: implement paint
     final headPoint = Offset(
       landmarks[0].x * size.width,
-      landmarks[0].y * size.width,
+      landmarks[0].y * size.height,
     );
-    final chestPoint = Offset(
-      (landmarks[6].x + landmarks[5].x) / 2 * size.width,
-      (landmarks[6].y + landmarks[5].y) / 2 * size.height,
-    );
+    // final chestPoint = Offset(
+    //   (landmarks[6].x + landmarks[5].x) / 2 * size.width,
+    //   (landmarks[6].y + landmarks[5].y) / 2 * size.height,
+    // );
     final leftShoulderPoint = Offset(
       landmarks[6].x * size.width,
-      landmarks[6].y * size.width,
+      landmarks[6].y * size.height,
     );
     final rightShoulderPoint = Offset(
       landmarks[5].x * size.width,
@@ -38,7 +38,7 @@ class PaintStickMan extends CustomPainter {
     );
     final leftHandPoint = Offset(
       landmarks[10].x * size.width,
-      landmarks[10].y * size.width,
+      landmarks[10].y * size.height,
     );
     final rightHandPoint = Offset(
       landmarks[9].x * size.width,
@@ -85,16 +85,16 @@ class PaintStickMan extends CustomPainter {
     final paint = Paint()
       ..color = Colors.black
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 5;
+      ..strokeWidth = 4;
     // drawing the canvas
     canvas.drawCircle(
       headPoint,
-      12,
+      8,
       headPaint,
     );
-    canvas.drawLine(headPoint, chestPoint, paint);
-    canvas.drawLine(chestPoint, leftShoulderPoint, paint);
-    canvas.drawLine(chestPoint, rightShoulderPoint, paint);
+    canvas.drawLine(headPoint, rightShoulderPoint, paint);
+    canvas.drawLine(headPoint, leftShoulderPoint, paint);
+    canvas.drawLine(leftShoulderPoint, rightShoulderPoint, paint);
     canvas.drawLine(leftShoulderPoint, leftElboPoint, paint);
     canvas.drawLine(leftElboPoint, leftHandPoint, paint);
     canvas.drawLine(rightShoulderPoint, rightElboPoint, paint);

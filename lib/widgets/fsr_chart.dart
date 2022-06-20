@@ -34,7 +34,7 @@ class _FSRChartState extends State<FSRChart> {
     return SliverToBoxAdapter(
       child: Card(
         child: SizedBox(
-          width: MediaQuery.of(context).size.height * 0.5,
+          // width: MediaQuery.of(context).size.height * 0.5,
           height: MediaQuery.of(context).size.height * 0.5,
           child: SafeArea(
             child: StreamBuilder(

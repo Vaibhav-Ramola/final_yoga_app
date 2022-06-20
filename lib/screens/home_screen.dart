@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yoga_project/Providers/data_provider.dart';
+import 'package:yoga_project/widgets/emg_chart.dart';
 import 'package:yoga_project/widgets/fsr_chart.dart';
 import 'package:yoga_project/widgets/multiple_skeletons.dart';
 import 'package:yoga_project/widgets/pulse_gsr_chart.dart';
@@ -98,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           if (_showFSR) const FSRChart(),
           if (_showGSR) const PulseGsrChart(),
+          if (_showEMG) const EMGChart(),
         ],
       ),
     );
