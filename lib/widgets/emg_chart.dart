@@ -69,8 +69,15 @@ class _EMGChartState extends State<EMGChart> {
                           }
                           return SfCartesianChart(
                             title: ChartTitle(text: "EMG Channel ${index + 1}"),
-                            primaryXAxis: CategoryAxis(),
+                            primaryXAxis: CategoryAxis(
+                              isVisible: false,
+                              title: AxisTitle(
+                                text: "Time",
+                              ),
+                            ),
                             primaryYAxis: NumericAxis(
+                              minimum: -5000,
+                              maximum: 5000,
                               name: "EMG_${index + 1}",
                             ),
                             series: <ChartSeries<Emg, String>>[

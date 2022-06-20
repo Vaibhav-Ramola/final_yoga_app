@@ -65,7 +65,10 @@ class _FSRChartState extends State<FSRChart> {
                       primaryYAxis: CategoryAxis(
                         isVisible: false,
                       ),
-                      primaryXAxis: CategoryAxis(),
+                      primaryXAxis: CategoryAxis(
+                        isVisible: false,
+                        title: AxisTitle(text: "Time")
+                      ),
                       axes: [
                         NumericAxis(
                           isVisible: true,
